@@ -360,3 +360,17 @@ proxy = ""
 pushd = ""
 crond = ""
 gifbox = ""
+
+[ts3_auth]
+# Enable TeamSpeak authentication
+enabled = false
+# Internal TS3 auth sidecar URL
+url = "http://127.0.0.1:8081"
+# Shared secret with the sidecar (set in secrets.env for production)
+secret = ""
+# Accounts created through TS3 use a deterministic synthetic email
+synthetic_email_domain = "users.north-industries.com"
+# Verification code lifetime in seconds
+code_ttl = 300
+# Maximum verification attempts per challenge
+max_attempts = 5

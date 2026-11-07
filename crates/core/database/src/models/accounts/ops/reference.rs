@@ -25,6 +25,15 @@ impl AbstractAccounts for ReferenceDb {
             .cloned())
     }
 
+    /// Find account linked to a TeamSpeak UID hash
+    async fn fetch_account_by_ts3_uid(&self, ts3_uid: &str) -> Result<Option<Account>> {
+        let accounts = self.accounts.lock().await;
+        Ok(accounts
+            .values()
+            .find(|account| account.ts3_uid.as_deref() == Some(ts3_uid))
+            .cloned())
+    }
+
     /// Find account with active pending email verification
     async fn fetch_account_with_email_verification(&self, token_to_match: &str) -> Result<Account> {
         let accounts = self.accounts.lock().await;

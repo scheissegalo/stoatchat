@@ -71,6 +71,7 @@ impl TestHarness {
             mfa: Default::default(),
             password_reset: None,
             verification: EmailVerification::Verified,
+            ts3_uid: None,
         };
 
         self.db.save_account(&account).await.expect("`Account`");

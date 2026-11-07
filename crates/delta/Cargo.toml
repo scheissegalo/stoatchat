@@ -28,6 +28,7 @@ regex = { workspace = true }
 num_enum = { workspace = true }
 impl_ops = { workspace = true }
 bitfield = { workspace = true }
+sha2 = { workspace = true }
 
 # ID / key generation
 ulid = { workspace = true }

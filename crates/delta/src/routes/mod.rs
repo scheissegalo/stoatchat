@@ -20,6 +20,7 @@ mod webhooks;
 mod account;
 mod session;
 mod mfa;
+mod ts3;
 
 pub fn mount(config: Settings, mut rocket: Rocket<Build>) -> Rocket<Build> {
     let settings = OpenApiSettings::default();
@@ -39,6 +40,7 @@ pub fn mount(config: Settings, mut rocket: Rocket<Build>) -> Rocket<Build> {
             "/auth/account" => account::routes(),
             "/auth/session" => session::routes(),
             "/auth/mfa" => mfa::routes(),
+            "/auth/ts3" => ts3::routes(),
             "/onboard" => onboard::routes(),
             "/policy" => policy::routes(),
             "/push" => push::routes(),
@@ -60,6 +62,7 @@ pub fn mount(config: Settings, mut rocket: Rocket<Build>) -> Rocket<Build> {
             "/auth/account" => account::routes(),
             "/auth/session" => session::routes(),
             "/auth/mfa" => mfa::routes(),
+            "/auth/ts3" => ts3::routes(),
             "/onboard" => onboard::routes(),
             "/policy" => policy::routes(),
             "/push" => push::routes(),

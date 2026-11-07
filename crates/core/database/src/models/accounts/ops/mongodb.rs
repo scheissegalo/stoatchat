@@ -39,6 +39,18 @@ impl AbstractAccounts for MongoDb {
         )
     }
 
+    /// Find account linked to a TeamSpeak UID hash
+    async fn fetch_account_by_ts3_uid(&self, ts3_uid: &str) -> Result<Option<Account>> {
+        query!(
+            self,
+            find_one,
+            COL,
+            doc! {
+                "ts3_uid": ts3_uid
+            }
+        )
+    }
+
     /// Find account with active pending email verification
     async fn fetch_account_with_email_verification(&self, token: &str) -> Result<Account> {
         query!(

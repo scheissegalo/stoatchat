@@ -17,6 +17,9 @@ pub trait AbstractAccounts: Sync + Send {
         normalised_email: &str,
     ) -> Result<Option<Account>>;
 
+    /// Find account linked to a TeamSpeak UID hash
+    async fn fetch_account_by_ts3_uid(&self, ts3_uid: &str) -> Result<Option<Account>>;
+
     /// Find account with active pending email verification
     async fn fetch_account_with_email_verification(&self, token: &str) -> Result<Account>;
 

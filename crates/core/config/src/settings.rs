@@ -426,6 +426,22 @@ pub struct Sentry {
 }
 
 #[derive(Deserialize, Debug, Clone)]
+pub struct Ts3Auth {
+    /// Whether TeamSpeak authentication is enabled
+    pub enabled: bool,
+    /// Internal URL of the TS3 auth sidecar
+    pub url: String,
+    /// Shared secret with the sidecar
+    pub secret: String,
+    /// Domain used for deterministic synthetic account emails
+    pub synthetic_email_domain: String,
+    /// Verification code lifetime in seconds
+    pub code_ttl: u64,
+    /// Maximum verification attempts per challenge
+    pub max_attempts: u32,
+}
+
+#[derive(Deserialize, Debug, Clone)]
 pub struct Settings {
     pub database: Database,
     pub rabbit: Rabbit,
@@ -436,6 +452,7 @@ pub struct Settings {
     pub files: Files,
     pub features: Features,
     pub sentry: Sentry,
+    pub ts3_auth: Ts3Auth,
     pub production: bool,
     pub environment: String,
     pub disable_events_dont_use: bool,

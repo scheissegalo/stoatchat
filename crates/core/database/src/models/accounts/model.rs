@@ -51,6 +51,10 @@ auto_derived_partial!(
 
         /// Multi-factor authentication information
         pub mfa: MultiFactorAuthentication,
+
+        /// Hash of the linked TeamSpeak unique identifier
+        #[serde(default)]
+        pub ts3_uid: Option<String>,
     },
     "PartialAccount"
 );
@@ -318,6 +322,7 @@ impl Account {
                 lockout: None,
 
                 mfa: Default::default(),
+                ts3_uid: None,
             };
 
             // Send email verification

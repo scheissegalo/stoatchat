@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#MISE description="Run TeamSpeak auth sidecar"
+set -e
+
+cd ../ts3-auth
+
+if [[ ! -d node_modules ]]; then
+  echo "Installing ts3-auth dependencies..."
+  npm install
+fi
+
+if [[ ! -f .env ]]; then
+  echo "Missing ../ts3-auth/.env"
+  echo "Copy .env.example, fill in TS3_QUERY_USER, TS3_QUERY_PASSWORD and INTERNAL_SECRET."
+  exit 1
+fi
+
+npm run build
+node dist/index.js
