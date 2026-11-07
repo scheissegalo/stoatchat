@@ -172,7 +172,9 @@ pub static DISCRIMINATOR_SEARCH_SPACE: Lazy<HashSet<String>> = Lazy::new(|| {
 });
 
 static BLOCKED_USERNAME_PATTERNS: Lazy<Regex> = Lazy::new(|| {
-    RegexBuilder::new("`{3}|(discord|rvlt|guilded|stt)\\.gg|(revolt|stoat)\\.chat|https?:\\/\\/")
+    RegexBuilder::new(
+        "`{3}|(discord|rvlt|guilded|stt)\\.gg|(revolt|stoat)\\.chat|(north-industries|northchat)\\.com|https?:\\/\\/",
+    )
         .case_insensitive(true)
         .build()
         .unwrap()
@@ -315,7 +317,14 @@ impl User {
 
         let username_lowercase = username.to_lowercase();
 
-        const BLOCKED_USERNAMES: &[&str] = &["admin", "revolt", "stoat"];
+        const BLOCKED_USERNAMES: &[&str] = &[
+            "admin",
+            "revolt",
+            "stoat",
+            "north",
+            "northchat",
+            "northindustries",
+        ];
 
         if BLOCKED_USERNAMES.contains(&username_lowercase.as_str())
             || BLOCKED_USERNAME_PATTERNS.is_match(username)
@@ -908,11 +917,15 @@ mod tests {
         let username_admin = "Admin";
         let username_revolt = "Revolt";
         let username_stoat = "Stoat";
+        let username_north = "North";
+        let username_northchat = "NorthChat";
         let username_allowed = "Allowed";
 
         assert!(User::validate_username(username_admin).is_err());
         assert!(User::validate_username(username_revolt).is_err());
         assert!(User::validate_username(username_stoat).is_err());
+        assert!(User::validate_username(username_north).is_err());
+        assert!(User::validate_username(username_northchat).is_err());
         assert!(User::validate_username(username_allowed).is_ok());
     }
 
@@ -925,6 +938,8 @@ mod tests {
         let username_stt = "stt.gg_test";
         let username_revolt = "revolt.chat_test";
         let username_stoat = "stoat.chat_test";
+        let username_north = "north-industries.com_test";
+        let username_northchat = "northchat.com_test";
         let username_http = "http://_test";
         let username_https = "https://_test";
 
@@ -935,6 +950,8 @@ mod tests {
         assert!(User::validate_username(username_stt).is_err());
         assert!(User::validate_username(username_revolt).is_err());
         assert!(User::validate_username(username_stoat).is_err());
+        assert!(User::validate_username(username_north).is_err());
+        assert!(User::validate_username(username_northchat).is_err());
         assert!(User::validate_username(username_http).is_err());
         assert!(User::validate_username(username_https).is_err());
     }

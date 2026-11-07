@@ -8,12 +8,8 @@ password on it, click below to continue.
 Please navigate to: {{url}}
 
 This email is intended for {{email}}
-Sent by Stoat
-Made in Europe
+Sent by North Chat
+North Industries
 
-Revolt Platforms Ltd. is a company incorporated and registered under the laws of England and Wales.
-
-Registration Number: 16260658
-Registered Office:
-Suite 5703 Unit 3A, 34-35 Hatton Garden,
-Holborn, United Kingdom, EC1N 8DX
+North Industries
+https://north-industries.com

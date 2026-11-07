@@ -170,15 +170,15 @@ auto_derived!(
     /// User badge bitfield
     #[repr(u32)]
     pub enum UserBadges {
-        /// Revolt Developer
+        /// North Chat Developer
         Developer = 1,
-        /// Helped translate Revolt
+        /// Helped translate North Chat
         Translator = 2,
-        /// Monetarily supported Revolt
+        /// Monetarily supported North Chat
         Supporter = 4,
         /// Responsibly disclosed a security issue
         ResponsibleDisclosure = 8,
-        /// Revolt Founder
+        /// North Chat Founder
         Founder = 16,
         /// Platform moderator
         PlatformModeration = 32,

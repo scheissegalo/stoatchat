@@ -3,17 +3,13 @@ Your account has been suspended, for one or more reasons:
 
 You will be able to use your account again in {{duration}} days.
 
-Further violations may result in a permanent ban depending on severity, please abide by the Community Guidelines (https://stoat.chat/legal/community-guidelines).
+Further violations may result in a permanent ban depending on severity, please abide by the Community Guidelines (https://north-industries.com/legal/community-guidelines).
 
 Ban evasion is prohibited and will be dealt with accordingly.
 
 This email is intended for {{email}}
-Sent by Stoat
-Made in Europe
+Sent by North Chat
+North Industries
 
-Revolt Platforms Ltd. is a company incorporated and registered under the laws of England and Wales.
-
-Registration Number: 16260658
-Registered Office:
-Suite 5703 Unit 3A, 34-35 Hatton Garden,
-Holborn, United Kingdom, EC1N 8DX
+North Industries
+https://north-industries.com

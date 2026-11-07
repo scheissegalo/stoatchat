@@ -161,10 +161,10 @@ impl UserLimits {
 /// # Server Configuration
 #[derive(Serialize, JsonSchema, Debug)]
 pub struct RevoltConfig {
-    /// Stoat API Version
+    /// North Chat API Version
     pub stoat: String,
     pub revolt: String,
-    /// Features enabled on this Stoat node
+    /// Features enabled on this North Chat node
     pub features: RevoltFeatures,
     /// WebSocket URL
     pub ws: String,
@@ -176,7 +176,7 @@ pub struct RevoltConfig {
 
 /// # Query Node
 ///
-/// Fetch the server configuration for this Revolt instance.
+/// Fetch the server configuration for this North Chat instance.
 #[openapi(tag = "Core")]
 #[get("/")]
 pub async fn root() -> Result<Json<RevoltConfig>> {
