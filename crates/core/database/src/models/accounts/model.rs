@@ -343,6 +343,41 @@ impl Account {
         }
     }
 
+    /// Create an account for a TeamSpeak identity.
+    ///
+    /// Synthetic TS3 addresses contain the UID hash after a `+`, which the
+    /// regular normaliser would strip. Store the raw lowercase address instead
+    /// so `email_normalised` stays unique per TS3 identity, and set the UID
+    /// link before the single save so no account is ever written with a
+    /// colliding normalised address.
+    pub async fn new_ts3(db: &Database, email: String, ts3_uid: String) -> Result<Account> {
+        let account = Account {
+            id: ulid::Ulid::new().to_string(),
+            email: email.clone(),
+            email_normalised: email.to_lowercase(),
+            password: hash_password(nanoid!(32))?,
+
+            disabled: false,
+            verification: EmailVerification::Verified,
+            password_reset: None,
+            deletion: None,
+            lockout: None,
+
+            mfa: Default::default(),
+            ts3_uid: Some(ts3_uid),
+        };
+
+        account.save(db).await?;
+
+        EventV1::CreateAccount {
+            account: account.clone(),
+        }
+        .global()
+        .await;
+
+        Ok(account)
+    }
+
     /// Create a new session
     pub async fn create_session(&self, db: &Database, name: String) -> Result<Session> {
         let config = config().await;

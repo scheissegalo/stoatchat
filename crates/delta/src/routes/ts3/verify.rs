@@ -1,19 +1,14 @@
 use chrono::Utc;
 use redis_kiss::AsyncCommands;
 use revolt_config::config;
-use revolt_database::{
-    util::{email::normalise_email, shield::ShieldValidationInput},
-    Account, Database,
-};
+use revolt_database::{util::shield::ShieldValidationInput, Account, Database};
 use revolt_models::v0;
 use revolt_result::{create_error, Result};
 use rocket::{serde::json::Json, State};
 use schemars::JsonSchema;
 use serde::Deserialize;
 
-use super::{
-    challenge_key, constant_time_eq, hash_code, synthetic_email, ts3_uid_hash, Challenge,
-};
+use super::{challenge_key, constant_time_eq, hash_code, synthetic_email, ts3_uid_hash, Challenge};
 
 #[derive(Deserialize, JsonSchema)]
 pub struct DataTs3Verify {
@@ -50,10 +45,9 @@ pub async fn verify(
         .get(challenge_key(&data.challenge_id))
         .await
         .map_err(|_| create_error!(InternalError))?;
-    let mut challenge: Challenge = serde_json::from_str(
-        &raw.ok_or_else(|| create_error!(InvalidToken))?,
-    )
-    .map_err(|_| create_error!(InternalError))?;
+    let mut challenge: Challenge =
+        serde_json::from_str(&raw.ok_or_else(|| create_error!(InvalidToken))?)
+            .map_err(|_| create_error!(InternalError))?;
 
     if challenge.ip != ip || challenge.expires < Utc::now().timestamp() {
         return Err(create_error!(InvalidToken));
@@ -96,22 +90,15 @@ pub async fn verify(
 
     let uid_hash = ts3_uid_hash(&selected_uid);
     let email = synthetic_email(&selected_uid, &config.ts3_auth.synthetic_email_domain);
-    let normalised = normalise_email(email.clone());
 
     let account = if let Some(account) = db.fetch_account_by_ts3_uid(&uid_hash).await? {
         // The user may have added a real email/password since the account was
         // created; the TS3 UID link still points at the same account.
         account
-    } else if let Some(mut account) = db.fetch_account_by_normalised_email(&normalised).await? {
-        // Older TS3 account created before the ts3_uid field existed.
-        account.ts3_uid = Some(uid_hash);
-        account.save(db).await?;
-        account
     } else {
-        let mut account = Account::new(db, email, nanoid::nanoid!(32), false).await?;
-        account.ts3_uid = Some(uid_hash);
-        account.save(db).await?;
-        account
+        // Create with a unique normalised address and the UID link in one
+        // save; never look the account up by the synthetic email.
+        Account::new_ts3(db, email, uid_hash).await?
     };
 
     if account.disabled {
