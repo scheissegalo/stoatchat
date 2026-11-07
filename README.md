@@ -1,15 +1,15 @@
 <div align="center">
 <h1>
-  Stoat Backend
+  North Chat Backend
   
-  [![Stars](https://img.shields.io/github/stars/stoatchat/stoatchat?style=flat-square&logoColor=white)](https://github.com/stoatchat/stoatchat/stargazers)
-  [![Forks](https://img.shields.io/github/forks/stoatchat/stoatchat?style=flat-square&logoColor=white)](https://github.com/stoatchat/stoatchat/network/members)
-  [![Pull Requests](https://img.shields.io/github/issues-pr/stoatchat/stoatchat?style=flat-square&logoColor=white)](https://github.com/stoatchat/stoatchat/pulls)
-  [![Issues](https://img.shields.io/github/issues/stoatchat/stoatchat?style=flat-square&logoColor=white)](https://github.com/stoatchat/stoatchat/issues)
-  [![Contributors](https://img.shields.io/github/contributors/stoatchat/stoatchat?style=flat-square&logoColor=white)](https://github.com/stoatchat/stoatchat/graphs/contributors)
-  [![License](https://img.shields.io/github/license/stoatchat/stoatchat?style=flat-square&logoColor=white)](https://github.com/stoatchat/stoatchat/blob/main/LICENSE)
+  [![Stars](https://img.shields.io/github/stars/scheissegalo/stoatchat?style=flat-square&logoColor=white)](https://github.com/scheissegalo/stoatchat/stargazers)
+  [![Forks](https://img.shields.io/github/forks/scheissegalo/stoatchat?style=flat-square&logoColor=white)](https://github.com/scheissegalo/stoatchat/network/members)
+  [![Pull Requests](https://img.shields.io/github/issues-pr/scheissegalo/stoatchat?style=flat-square&logoColor=white)](https://github.com/scheissegalo/stoatchat/pulls)
+  [![Issues](https://img.shields.io/github/issues/scheissegalo/stoatchat?style=flat-square&logoColor=white)](https://github.com/scheissegalo/stoatchat/issues)
+  [![Contributors](https://img.shields.io/github/contributors/scheissegalo/stoatchat?style=flat-square&logoColor=white)](https://github.com/scheissegalo/stoatchat/graphs/contributors)
+  [![License](https://img.shields.io/github/license/scheissegalo/stoatchat?style=flat-square&logoColor=white)](https://github.com/scheissegalo/stoatchat/blob/main/LICENSE)
 </h1>
-The services and libraries that power the Stoat service.<br/>
+The services and libraries that power the North Chat service.<br/>
 <br/>
 
 | Crate              | Path                                               | Description                         |                                                                                                                                                                                                                                                                                                           |
@@ -39,7 +39,7 @@ Rust 1.86.0 or higher.
 
 ## Development Guide
 
-Before contributing, make yourself familiar with [our contribution guidelines](https://developers.stoat.chat/developing/contrib/) and the [technical documentation for this project](https://developers.stoat.chat/).
+Before contributing, make yourself familiar with [our contribution guidelines](https://github.com/scheissegalo/stoatchat/developing/contrib/) and the [technical documentation for this project](https://github.com/scheissegalo/stoatchat/).
 
 Before getting started, you'll want to install:
 
@@ -58,7 +58,7 @@ As a heads-up, the development environment uses the following ports:
 | Redis                     |      6379      |
 | MinIO                     |     14009      |
 | Maildev                   | 14025<br>14080 |
-| Revolt Web App            |     14701      |
+| North Chat Web App            |     14701      |
 | RabbitMQ                  | 5672<br>15672  |
 | Grafana LGTM (OTLP)       | 13000<br>4318  |
 | `crates/delta`            |     14702      |
@@ -70,7 +70,7 @@ As a heads-up, the development environment uses the following ports:
 Now you can clone and build the project:
 
 ```bash
-git clone https://github.com/stoatchat/stoatchat stoat-backend
+git clone https://github.com/scheissegalo/stoatchat stoat-backend
 cd stoat-backend
 mise install
 mise build
@@ -84,15 +84,15 @@ mise build
 > BUILDER = "mold --run cargo"
 > ```
 
-A default configuration `Revolt.toml` is present in this project that is suited for development.
+A default configuration `North Chat.toml` is present in this project that is suited for development.
 
-If you'd like to change anything, create a `Revolt.overrides.toml` file and specify relevant variables.
+If you'd like to change anything, create a `North Chat.overrides.toml` file and specify relevant variables.
 
 > [!TIP]
 > Use Sentry to catch unexpected service errors:
 >
 > ```toml
-> # Revolt.overrides.toml
+> # North Chat.overrides.toml
 > [sentry]
 > api = "https://abc@your.sentry/1"
 > events = "https://abc@your.sentry/1"
@@ -125,11 +125,11 @@ If you'd like to change anything, create a `Revolt.overrides.toml` file and spec
 >       - "14318:4318"
 > ```
 >
-> With the corresponding Revolt configuration:
+> With the corresponding North Chat configuration:
 >
 > ```toml
-> #     Revolt.overrides.toml
-> # and Revolt.test-overrides.toml
+> #     North Chat.overrides.toml
+> # and North Chat.test-overrides.toml
 > [database]
 > mongodb = "mongodb://127.0.0.1:14017/?directConnection=true"
 > redis = "redis://127.0.0.1:14079/"
@@ -213,7 +213,7 @@ Tag and push a new release by running:
 just release
 ```
 
-If you have bumped the crate versions, proceed to [GitHub releases](https://github.com/stoatchat/stoatchat/releases/new) to create a changelog.
+If you have bumped the crate versions, proceed to [GitHub releases](https://github.com/scheissegalo/stoatchat/releases/new) to create a changelog.
 
 ## Testing
 
@@ -232,6 +232,6 @@ TEST_DB=MONGODB cargo nextest run
 
 ## License
 
-The Stoat backend is generally licensed under the [GNU Affero General Public License v3.0](https://github.com/stoatchat/stoatchat/blob/main/LICENSE).
+The North Chat backend is generally licensed under the [GNU Affero General Public License v3.0](https://github.com/scheissegalo/stoatchat/blob/main/LICENSE).
 
 **Individual crates may supply their own licenses!**
