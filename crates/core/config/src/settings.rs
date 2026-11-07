@@ -454,10 +454,18 @@ impl Settings {
 }
 
 pub async fn init() {
-    println!(
-        ":: Revolt Configuration ::\n\x1b[32m{:?}\x1b[0m",
-        config().await
-    );
+    let config = config().await;
+
+    // Never dump the full configuration in production: it contains SMTP,
+    // LiveKit, VAPID and file-encryption secrets.
+    if config.production {
+        println!(":: North Chat Configuration :: production mode");
+    } else {
+        println!(
+            ":: North Chat Configuration ::\n\x1b[32m{:?}\x1b[0m",
+            config
+        );
+    }
 }
 
 pub async fn read() -> Config {
